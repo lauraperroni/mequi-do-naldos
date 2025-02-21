@@ -1,10 +1,7 @@
-import { Button } from "@/components/ui/button";
-import { getRestaurantBySlug } from "@/data/get-restaurant-by-slug";
-import { ConsumptionMethod } from "@prisma/client";
-import { ChevronLeftIcon, ScrollTextIcon } from "lucide-react";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import RestaurantHeader from "./components/header";
+import RestaurantCategories from "./components/categories";
+import { db } from "@/lib/prisma";
 
 interface RestaurantMenuPageProps {
   params: Promise<{ slug: string }>;
@@ -20,8 +17,15 @@ const RestaurantMenuPage = async ({
   searchParams,
 }: RestaurantMenuPageProps) => {
   const { slug } = await params;
-  const { consumptionMethod } = await searchParams;
-  const restaurant = await getRestaurantBySlug(slug);
+
+  const restaurant = await db.restaurant.findUnique({
+    where: { slug },
+    include: {
+      menuCategories: {
+        include: { products: true },
+      },
+    },
+  });
 
   if (!restaurant) {
     notFound();
@@ -31,6 +35,7 @@ const RestaurantMenuPage = async ({
     <>
       <div>
         <RestaurantHeader restaurant={restaurant} />
+        <RestaurantCategories restaurant={restaurant} />
       </div>
     </>
   );
