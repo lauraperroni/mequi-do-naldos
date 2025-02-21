@@ -15,7 +15,7 @@ const RestaurantHeader = ({ restaurant }: RestaurantHeaderProps) => {
 
   return (
     <>
-      <div className="relative h-[250px] w-full">
+      <div className="relative z-30 h-[250px] w-full">
         <Button
           variant="secondary"
           size="icon"
@@ -28,7 +28,7 @@ const RestaurantHeader = ({ restaurant }: RestaurantHeaderProps) => {
           src={restaurant.coverImageUrl}
           alt={restaurant.name}
           fill
-          className="object-cover"
+          className="absolute object-cover"
         />
         <Button
           variant="secondary"
