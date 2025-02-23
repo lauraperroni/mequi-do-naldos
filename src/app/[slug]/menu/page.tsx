@@ -1,21 +1,16 @@
 import { notFound } from "next/navigation";
-import RestaurantHeader from "./components/header";
-import RestaurantCategories from "./components/categories";
+
 import { db } from "@/lib/prisma";
+
+import RestaurantCategories from "./components/categories";
+import RestaurantHeader from "./components/header";
 
 interface RestaurantMenuPageProps {
   params: Promise<{ slug: string }>;
   searchParams: Promise<{ consumptionMethod: string }>;
 }
 
-const isConsumptionMethodValid = (value: string) => {
-  return ["DINE_IN", "TAKEAWAY"].includes(value);
-};
-
-const RestaurantMenuPage = async ({
-  params,
-  searchParams,
-}: RestaurantMenuPageProps) => {
+const RestaurantMenuPage = async ({ params }: RestaurantMenuPageProps) => {
   const { slug } = await params;
 
   const restaurant = await db.restaurant.findUnique({
@@ -34,7 +29,7 @@ const RestaurantMenuPage = async ({
   return (
     <>
       <div>
-        <RestaurantHeader restaurant={restaurant} />
+        <RestaurantHeader restaurant={restaurant} image={true} />
         <RestaurantCategories restaurant={restaurant} />
       </div>
     </>
