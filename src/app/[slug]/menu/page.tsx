@@ -10,9 +10,19 @@ interface RestaurantMenuPageProps {
   searchParams: Promise<{ consumptionMethod: string }>;
 }
 
-const RestaurantMenuPage = async ({ params }: RestaurantMenuPageProps) => {
-  const { slug } = await params;
+const isConsumptionMethodValid = (consumptionMethod: string) => {
+  return ["DINE_IN", "TAKEAWAY"].includes(consumptionMethod.toUpperCase());
+};
 
+const RestaurantMenuPage = async ({
+  params,
+  searchParams,
+}: RestaurantMenuPageProps) => {
+  const { slug } = await params;
+  const { consumptionMethod } = await searchParams;
+  if (!isConsumptionMethodValid(consumptionMethod)) {
+    return notFound();
+  }
   const restaurant = await db.restaurant.findUnique({
     where: { slug },
     include: {
@@ -21,18 +31,14 @@ const RestaurantMenuPage = async ({ params }: RestaurantMenuPageProps) => {
       },
     },
   });
-
   if (!restaurant) {
-    notFound();
+    return notFound();
   }
-
   return (
-    <>
-      <div>
-        <RestaurantHeader restaurant={restaurant} image={true} />
-        <RestaurantCategories restaurant={restaurant} />
-      </div>
-    </>
+    <div>
+      <RestaurantHeader restaurant={restaurant} />
+      <RestaurantCategories restaurant={restaurant} />
+    </div>
   );
 };
 
