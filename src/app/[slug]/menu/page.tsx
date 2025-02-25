@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import RestaurantHeader from "./components/header";
 import RestaurantCategories from "./components/categories";
 import { db } from "@/lib/prisma";
@@ -12,11 +13,20 @@ import RestaurantCategories from "./components/categories";
 import RestaurantHeader from "./components/header";
 
 >>>>>>> upstream/aula-05
+=======
+
+import { db } from "@/lib/prisma";
+
+import RestaurantCategories from "./components/categories";
+import RestaurantHeader from "./components/header";
+
+>>>>>>> 39678f3cac0389303769a6b2e1c94fced3beb944
 interface RestaurantMenuPageProps {
   params: Promise<{ slug: string }>;
   searchParams: Promise<{ consumptionMethod: string }>;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 const isConsumptionMethodValid = (value: string) => {
   return ["DINE_IN", "TAKEAWAY"].includes(value);
@@ -30,6 +40,9 @@ const RestaurantMenuPage = async ({
   params,
   searchParams,
 }: RestaurantMenuPageProps) => {
+=======
+const RestaurantMenuPage = async ({ params }: RestaurantMenuPageProps) => {
+>>>>>>> 39678f3cac0389303769a6b2e1c94fced3beb944
   const { slug } = await params;
 <<<<<<< HEAD
 
@@ -56,7 +69,7 @@ const RestaurantMenuPage = async ({
   return (
     <>
       <div>
-        <RestaurantHeader restaurant={restaurant} />
+        <RestaurantHeader restaurant={restaurant} image={true} />
         <RestaurantCategories restaurant={restaurant} />
       </div>
     </>
