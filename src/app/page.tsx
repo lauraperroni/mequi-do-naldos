@@ -1,21 +1,13 @@
-"use client";
-import { useParams } from "next/navigation";
-import router from "next/navigation";
+import RestaurantPage from "./[slug]/page";
+interface RestaurantMenuPageProps {
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ consumptionMethod: string }>;
+}
 
-import { Button } from "@/components/ui/button";
-
-const HomePage = () => {
-  const { slug } = useParams<{ slug: string }>();
-  const handleOrdersClick = () => router.redirect(`/${slug}`);
-
+const HomePage = async ({ params }: RestaurantMenuPageProps) => {
   return (
     <>
-      <Button
-        variant="secondary"
-        size="icon"
-        className="absolute right-4 top-4 z-50 rounded-full"
-        onClick={handleOrdersClick}
-      ></Button>
+      <RestaurantPage params={params} />
     </>
   );
 };
