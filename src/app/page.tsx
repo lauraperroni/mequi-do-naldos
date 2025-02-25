@@ -1,11 +1,12 @@
+"use client";
 import { useParams } from "next/navigation";
-import router from "next/router";
+import router from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 
 const HomePage = () => {
   const { slug } = useParams<{ slug: string }>();
-  const handleOrdersClick = () => router.push(`/${slug}`);
+  const handleOrdersClick = () => router.redirect(`/${slug}`);
 
   return (
     <>
