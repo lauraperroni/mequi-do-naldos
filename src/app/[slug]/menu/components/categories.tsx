@@ -1,13 +1,5 @@
 "use client";
 
-<<<<<<< HEAD
-import { Button } from "@/components/ui/button";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { Prisma } from "@prisma/client";
-import { ClockIcon } from "lucide-react";
-import Image from "next/image";
-import { useState } from "react";
-=======
 import { Prisma } from "@prisma/client";
 import { ClockIcon } from "lucide-react";
 import Image from "next/image";
@@ -19,7 +11,6 @@ import { formatCurrency } from "@/helpers/format-currency";
 
 import { CartContext } from "../contexts/cart";
 import CartSheet from "./cart-sheet";
->>>>>>> upstream/aula-05
 import Products from "./products";
 
 interface RestaurantCategoriesProps {
@@ -39,16 +30,6 @@ type MenuCategoriesWithProducts = Prisma.MenuCategoryGetPayload<{
 const RestaurantCategories = ({ restaurant }: RestaurantCategoriesProps) => {
   const [selectedCategory, setSelectedCategory] =
     useState<MenuCategoriesWithProducts>(restaurant.menuCategories[0]);
-<<<<<<< HEAD
-  const handleCategoryClick = (category: MenuCategoriesWithProducts) => {
-    setSelectedCategory(category);
-  };
-
-  const getCategoryButtonVariant = (category: MenuCategoriesWithProducts) => {
-    return selectedCategory.id === category.id ? "default" : "secondary";
-  };
-
-=======
   const { products, total, toggleCart, totalQuantity } =
     useContext(CartContext);
   const handleCategoryClick = (category: MenuCategoriesWithProducts) => {
@@ -57,7 +38,6 @@ const RestaurantCategories = ({ restaurant }: RestaurantCategoriesProps) => {
   const getCategoryButtonVariant = (category: MenuCategoriesWithProducts) => {
     return selectedCategory.id === category.id ? "default" : "secondary";
   };
->>>>>>> upstream/aula-05
   return (
     <div className="relative z-50 mt-[-1.5rem] rounded-t-3xl bg-white">
       <div className="p-5">
@@ -83,19 +63,11 @@ const RestaurantCategories = ({ restaurant }: RestaurantCategoriesProps) => {
         <div className="flex w-max space-x-4 p-4 pt-0">
           {restaurant.menuCategories.map((category) => (
             <Button
-<<<<<<< HEAD
-              key={category.id}
-              variant={getCategoryButtonVariant(category)}
-              size={"sm"}
-              className="rounded-full"
-              onClick={() => handleCategoryClick(category)}
-=======
               onClick={() => handleCategoryClick(category)}
               key={category.id}
               variant={getCategoryButtonVariant(category)}
               size="sm"
               className="rounded-full"
->>>>>>> upstream/aula-05
             >
               {category.name}
             </Button>
@@ -103,10 +75,6 @@ const RestaurantCategories = ({ restaurant }: RestaurantCategoriesProps) => {
         </div>
         <ScrollBar orientation="horizontal" />
       </ScrollArea>
-<<<<<<< HEAD
-      <h3 className="px-5 pt-2 font-semibold">{selectedCategory.name}</h3>
-      <Products products={selectedCategory.products}></Products>
-=======
 
       <h3 className="px-5 pt-2 font-semibold">{selectedCategory.name}</h3>
       <Products products={selectedCategory.products} />
@@ -125,7 +93,6 @@ const RestaurantCategories = ({ restaurant }: RestaurantCategoriesProps) => {
           <CartSheet />
         </div>
       )}
->>>>>>> upstream/aula-05
     </div>
   );
 };
