@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { useContext, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -49,37 +48,6 @@ const CartSheet = () => {
             onOpenChange={setFinishOrderDialogIsOpen}
           />
         </div>
-=======
-import { useContext } from "react";
-
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-} from "@/components/ui/sheet";
-
-import { CartContext } from "../contexts/cart";
-
-const CartSheet = () => {
-  const { isOpen, toggleCart, products } = useContext(CartContext);
-  return (
-    <Sheet open={isOpen} onOpenChange={toggleCart}>
-      <SheetContent>
-        <SheetHeader>
-          <SheetTitle>Are you absolutely sure?</SheetTitle>
-          <SheetDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
-          </SheetDescription>
-        </SheetHeader>
-        {products.map((product) => (
-          <h1 key={product.id}>
-            {product.name} - {product.quantity}
-          </h1>
-        ))}
->>>>>>> 39678f3cac0389303769a6b2e1c94fced3beb944
       </SheetContent>
     </Sheet>
   );
